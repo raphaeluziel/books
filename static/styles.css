@@ -1,0 +1,79 @@
+/* For browsers not using HTML5 */
+header, section, footer, aside, nav, main, article, figure {
+  display: block;
+}
+
+body{
+  max-width: 1000px;
+  margin: 40px auto;
+  font-size: 125%;
+  background-color: #eeeee0;
+}
+
+.flex-layout{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user-form{
+  flex-direction: column;
+  margin: 10px 50px 10px 50px;
+}
+
+.box{
+  background-color: beige;
+  width: 80%;
+  padding: 10px 20px 10px 20px;
+  border: 2px solid wheat;
+  border-radius: 4px;
+}
+
+input{
+  margin: 5px;
+}
+
+.link-button{
+  color: black;
+  background-color: #ffeeee;
+  padding: 5px;
+  margin: 10px 20px 10px 0px;
+  border: 1px solid pink;
+  border-radius: 6px;
+}
+
+.error-message{
+  color: red;
+}
+
+.star{
+  color: gold;
+}
+
+.review{
+  font-style: italic;
+  color: gray;
+  font-family: 'Times New Roman', Times, Serif;
+}
+
+.date{
+  font-size: 1em;
+}
+
+.error{
+  color: darkred;
+  font-family: Impact, sans-serif;
+  font-size: 10vw;
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  body {
+    font-size: 1em;
+  }
+  textarea {
+    width: 100%;
+  }
+  .box{
+    width: 100%;
+  }
+}

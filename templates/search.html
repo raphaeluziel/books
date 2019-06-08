@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Books
+{% endblock %}
+
+{% block body %}
+
+  <h1>CS50W Project 1: Book Review</h1>
+
+  <h3>{{ user.name }}</h3>
+
+  <div class="flex-layout">
+    <div class="link-button"><a href="/search">Search books</a></div>
+    {% if session.userid %}
+        <div class="link-button"><a href="/logout">Log Out</a></div>
+    {% else %}
+        <div class="link-button"><a href="/register">Register</a></div>
+        <div class="link-button"><a href="/login">Log In</a></div>
+    {% endif %}
+  </div>
+
+  <p>
+    &nbsp;&nbsp;&nbsp;&nbsp;Please type in some information below on the book you would like to search for, and a list will be generated.  You can type in part or all of a book's isbn number, or title, or author.  Or you can search books by year written, or both!
+  </p>
+
+  <form action="{{ url_for('search') }}" method="post" class="form-inline">
+
+    <div class="form-group">
+      <label class="sr-only" for="title/author/isbn">Title / Author / ISBN</label>
+      <input class="form-control" name="search" placeholder="Title / Author / ISBN">
+    </div>
+    <div>
+      and/or
+    </div>
+    <div class="form-group numerical-input">
+      <label class="sr-only" for="year">Year:</label>
+      <input class="form-control" name="year" placeholder="Year" type="number" step="1">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary"><i class="fas fa-search"> Search</i></button>
+    </div>
+
+  </form>
+
+  <p class="error-message">{{ message }}</p>
+
+  <ol>
+    {% for book in books %}
+      <li>
+        <a href="{{ url_for('book', book_id=book.id) }}">
+          {{ book.title }} by {{ book.author }} written in {{ book.year }} ISBN: {{ book.isbn }}
+        </a>
+      </li>
+    {% endfor %}
+  </ol>
+
+{% endblock %}

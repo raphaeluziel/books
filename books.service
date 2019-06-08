@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn instance to serve books
+After=network.target
+
+[Service]
+User=raphaeluziel
+Group=www-data
+WorkingDirectory=/home/raphaeluziel/books
+Environment="PATH=/home/raphaeluziel/books/booksenv/bin"
+ExecStart=/home/raphaeluziel/books/booksenv/bin/gunicorn --workers 1 --bind unix:books.sock -m 007 wsgi:app
+
+
+[Install]
+WantedBy=multi-user.target

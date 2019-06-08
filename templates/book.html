@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Books
+{% endblock %}
+
+{% block body %}
+
+
+
+  <h1>CS50W Project 1: Book Review</h1>
+
+  <h3>{{ user.name }}</h3>
+
+  <div class="flex-layout">
+    <div class="link-button"><a href="/search">Search books</a></div>
+    {% if session.userid %}
+        <div class="link-button"><a href="/logout">Log Out</a></div>
+    {% else %}
+        <div class="link-button"><a href="/register">Register</a></div>
+        <div class="link-button"><a href="/login">Log In</a></div>
+    {% endif %}
+  </div>
+
+  <div class="flex-layout">
+    <div class="box">
+      <h2>{{ book.title }}</h2>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;by {{ book.author}}</div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;year: {{ book.year}}</div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;isbn: {{ book.isbn}}</div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;Goodreads average rating: {{ GRreviews.json().books[0].average_rating }}</div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;Goodreads number of reviews:{{ GRreviews.json().books[0].work_ratings_count }}</div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;Information from <a href="https://www.goodreads.com/api" target="_blank">Goodreads</a></div>
+    </div>
+  </div>
+
+  <p>
+    <form action="{{ url_for('book', book_id=book.id) }}" method="post">
+      <p><b>Your rating:</b><br>
+        <span>Hated it</span>
+        <label class="radio-inline"><input type="radio" name="rating" value="1"></label>
+        <label class="radio-inline"><input type="radio" name="rating" value="2"></label>
+        <label class="radio-inline"><input type="radio" name="rating" value="3" checked></label>
+        <label class="radio-inline"><input type="radio" name="rating" value="4"></label>
+        <label class="radio-inline"><input type="radio" name="rating" value="5"></label>
+        <span>Loved it</span>
+      </p>
+      <textarea name="review" rows="4" cols="40" placeholder="comments"></textarea><br>
+      <button class="btn btn-primary">submit</button>
+    </form>
+  </p>
+
+  <h4>Other reviews from this site:</h4>
+  {% if reviews|length == 0 %}
+    <p style='color:blue'>&nbsp;&nbsp;&nbsp;&nbsp;Be the first to review this book on this site!</p>
+  {% endif %}
+  {% for review in reviews %}
+    <p>
+      {{ review.name }}<br>
+      {% for i in range(review.rating) %}
+        <i class="fas fa-star star"></i>
+      {% endfor %}
+      <span class="date">
+        {{ review.posted.strftime("%b %d, %Y") }}<br>
+      </span>
+      <span class="review">
+        &nbsp;&nbsp;&nbsp;&nbsp;{{ review.review }}
+      </span>
+    </p>
+  {% endfor %}
+
+{% endblock %}

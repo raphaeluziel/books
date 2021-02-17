@@ -88,6 +88,7 @@ def logout():
 @app.route("/register", methods=["POST"])
 def register():
 
+
     """Register a new user"""
 
     # Ensure user filled out form with all required information
@@ -191,6 +192,12 @@ def book(book_id):
 
     """Book details page"""
 
+    """ NOTE: Goodreads discontinued their API on December 2020"""
+    return render_template("apierror.html")
+
+
+    """Previously, when Goodreads API was working"""
+
     # User reached page via get (clicked a link)
     if request.method == "GET":
 
@@ -209,6 +216,7 @@ def book(book_id):
     # Obtain review data from Goodreads
     payload = {"key": "j4keFTedeDmmZ6Zu9Ondmg", "isbns": book.isbn}
     GRreviews = requests.get("https://www.goodreads.com/book/review_counts.json", params=payload)
+
 
     # Join users table with reviews table and search for all reviews of that book
     reviews = db.execute("SELECT * FROM reviews JOIN users ON users.id = reviews.userid WHERE bookid = :bookid ORDER BY posted DESC", {"bookid": book_id}).fetchall()

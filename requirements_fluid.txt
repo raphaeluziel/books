@@ -1,0 +1,7 @@
+Flask
+Flask-Session
+psycopg2
+SQLAlchemy
+requests
+python-dotenv
+gunicorn

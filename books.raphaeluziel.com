@@ -1,6 +1,8 @@
 server {
     listen 80;
-    server_name books.raphaeluziel.net;
+    listen [::]:80;
+    
+    server_name books.raphaeluziel.com;
 
     location / {
         include proxy_params;

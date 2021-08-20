@@ -15,6 +15,8 @@ load_dotenv()
 
 app = Flask(__name__)
 
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+
 # Check for environment variable
 if not os.getenv("BOOKSDB_URL"):
     raise RuntimeError("BOOKSDB_URL is not set")

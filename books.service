@@ -6,8 +6,8 @@ After=network.target
 User=raphaeluziel
 Group=www-data
 WorkingDirectory=/home/raphaeluziel/books
-Environment="PATH=/home/raphaeluziel/books/booksenv/bin"
-ExecStart=/home/raphaeluziel/books/booksenv/bin/gunicorn --workers 1 --bind unix:books.sock -m 007 wsgi:app
+Environment="PATH=/home/raphaeluziel/books/venv/bin"
+ExecStart=/home/raphaeluziel/books/venv/bin/gunicorn --workers 1 --bind unix:books.sock -m 007 wsgi:app
 
 
 [Install]
